@@ -1,0 +1,9 @@
+export { default as SideBar } from './SideBar/SideBar';
+export { default as MenuItem } from './SideBar/MenuItem';
+export { default as Posts } from './Profile/Posts';
+export { default as Profile } from './Profile/Profile';
+export { default as Header } from './Header/Header';
+export { default as Dialogs } from './Dialogs/Dialogs';
+export { default as DialogItem } from './Dialogs/DialogItem';
+export { default as Message } from './Dialogs/Message';
+export { default as Friends } from './Friends/Friends';

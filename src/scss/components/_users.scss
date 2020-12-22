@@ -1,0 +1,63 @@
+.users {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  img {
+    border-radius: 100%;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+  }
+  &__menu {
+    &-item {
+      font-size: 18px;
+      margin-right: 10px;
+      cursor: pointer;
+      &.active {
+        color: red;
+      }
+    }
+  }
+  &-item {
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    &-name {
+      font-weight: 500;
+      font-size: 25px;
+      margin-bottom: 40px;
+    }
+    &-status {
+      font-size: 18px;
+    }
+    &-country {
+      font-weight: 500;
+      font-size: 22px;
+    }
+    &-city {
+      font-weight: 500;
+      font-size: 22px;
+    }
+    &__main {
+      display: flex;
+      flex-direction: column;
+      button {
+        display: block;
+        width: 100px;
+        height: 30px;
+        margin: 0 auto;
+      }
+    }
+    &__info {
+      display: flex;
+      justify-content: space-between;
+      border-radius: 15px;
+      width: 100%;
+      margin-left: 20px;
+      height: 120px;
+      padding: 15px;
+      border: 1px solid #55acee;
+    }
+  }
+}
