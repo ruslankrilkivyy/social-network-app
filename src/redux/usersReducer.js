@@ -64,7 +64,7 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         followingInProggress: action.isLoading
           ? [...state.followingInProggress, action.userId]
-          : state.followingInProggress.filter((id) => id != action.userId),
+          : state.followingInProggress.filter((id) => id !== action.userId),
       };
     default:
       return state;

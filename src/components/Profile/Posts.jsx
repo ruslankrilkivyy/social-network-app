@@ -3,7 +3,7 @@ import React from 'react';
 import PostAdd from './PostAdd';
 import PostsNew from './PostsNew';
 
-function Posts({ posts, addPost }) {
+const Posts = React.memo(({ posts, addPost }) => {
   return (
     <div className="content__posts">
       <PostAdd addPost={addPost} />
@@ -12,6 +12,6 @@ function Posts({ posts, addPost }) {
       </div>
     </div>
   );
-}
+});
 
 export default Posts;
