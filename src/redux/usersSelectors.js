@@ -16,18 +16,37 @@ export const getPageSize = createSelector(getPageSizeSelector, (pageSize) => {
   return pageSize;
 });
 
-export const totalUsersCount = (state) => {
+const totalUsersCountSelector = (state) => {
   return state.usersReducer.totalUsersCount;
 };
 
-export const currentPage = (state) => {
+export const totalUsersCount = createSelector(totalUsersCountSelector, (totalUsersCount) => {
+  return totalUsersCount;
+});
+
+const currentPageSelector = (state) => {
   return state.usersReducer.currentPage;
 };
 
-export const isLoading = (state) => {
+export const currentPage = createSelector(currentPageSelector, (currentPage) => {
+  return currentPage;
+});
+
+const isLoadingSelector = (state) => {
   return state.usersReducer.isLoading;
 };
 
-export const followingInProggress = (state) => {
+export const isLoading = createSelector(isLoadingSelector, (isLoading) => {
+  return isLoading;
+});
+
+const followingInProggressSelector = (state) => {
   return state.usersReducer.followingInProggress;
 };
+
+export const followingInProggress = createSelector(
+  followingInProggressSelector,
+  (followingInProggress) => {
+    return followingInProggress;
+  },
+);

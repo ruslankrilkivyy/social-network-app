@@ -38,6 +38,7 @@ let mapStateToProps = (state) => ({
   status: state.profileReducer.status,
   isAuth: state.authReducer.isAuth,
   authorizedUserId: state.authReducer.userId,
+  isLoading: state.profileReducer.isLoading,
 });
 
 export default compose(

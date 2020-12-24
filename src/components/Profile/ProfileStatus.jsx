@@ -14,6 +14,9 @@ const ProfileStatus = ({ status, updateStatus }) => {
   };
 
   React.useEffect(() => {
+    if (inputValue === null) {
+      setVisibleInput(true);
+    }
     setInputValue(inputValue);
   }, [inputValue]);
 

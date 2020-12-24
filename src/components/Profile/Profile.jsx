@@ -4,7 +4,7 @@ import Preloader from '../Preloader/Preloader';
 import { Redirect } from 'react-router-dom';
 import ProfileStatus from './ProfileStatus';
 
-function Profile({ profile, isAuth, status, updateStatus }) {
+function Profile({ profile, isAuth, status, updateStatus, isLoading }) {
   if (!profile) {
     return <Preloader />;
   }
@@ -21,7 +21,11 @@ function Profile({ profile, isAuth, status, updateStatus }) {
         />
         <div className="profile__info">
           <h4 className="profile-name">{profile.fullName}</h4>
-          <ProfileStatus status={status} updateStatus={updateStatus} />
+          {isLoading ? (
+            <Preloader />
+          ) : (
+            <ProfileStatus status={status} updateStatus={updateStatus} />
+          )}
         </div>
       </div>
       <PostsContainer />
