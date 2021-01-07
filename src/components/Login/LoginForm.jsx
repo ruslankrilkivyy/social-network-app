@@ -1,38 +1,20 @@
 import React from 'react';
-import { Field } from 'redux-form';
+// import { Field } from 'redux-form';
 
 import { required, maxLengthCreator } from '../../utils/validators/validators';
-import { Element } from '../FormsControls/FormsControls';
+import { createField, Input } from '../FormsControls/FormsControls';
 
 const maxLength = maxLengthCreator(50);
-const Input = Element('input');
 
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <Field
-          type="text"
-          placeholder={'Email'}
-          name={'email'}
-          component={Input}
-          validate={[required, maxLength]}
-        />
-      </div>
-      <div>
-        <Field
-          type="password"
-          placeholder={'Password'}
-          name={'password'}
-          component={Input}
-          validate={[required, maxLength]}
-        />
-      </div>
+      {createField('Email', 'email', [required, maxLength], Input)}
+      {createField('Password', 'password', [required], Input, { type: 'password' })}
+      {createField(null, 'rememberMe', [], Input, { type: 'checkbox' }, 'remember me')}
       {error && <div className="form__login-error">Password or Email is wrong</div>}
-      <div>
-        <Field type="checkbox" name={'rememberMe'} component={Input} />
-        remember me
-      </div>
+      {captchaUrl && <img src={captchaUrl} alt="captcha" />}
+      {captchaUrl && createField(null, 'captcha', [required], Input)}
       <div>
         <button>Login</button>
       </div>

@@ -16,7 +16,7 @@ function Users({
   return (
     <div className="users">
       <Paginator
-        totalUsersCount={totalUsersCount}
+        totalItemsCount={totalUsersCount}
         pageSize={pageSize}
         onChangedPage={onChangedPage}
         currentPage={currentPage}

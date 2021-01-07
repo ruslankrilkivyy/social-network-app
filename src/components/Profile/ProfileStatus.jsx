@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfileStatus = ({ status, updateStatus }) => {
+const ProfileStatus = ({ status, updateStatus, isOwner }) => {
   const [inputValue, setInputValue] = React.useState(status);
   const [visibleInput, setVisibleInput] = React.useState(false);
 
@@ -31,7 +31,7 @@ const ProfileStatus = ({ status, updateStatus }) => {
         <div className="status-input">
           <input
             type="text"
-            autoFocus={true}
+            autoFocus={isOwner && true}
             onBlur={onVisibleInput}
             onChange={(e) => onChangeInputValue(e)}
             value={inputValue}

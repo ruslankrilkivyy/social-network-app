@@ -1,3 +1,5 @@
+@import '../vars';
+
 .users {
   background-color: #fff;
   padding: 20px;
@@ -9,16 +11,28 @@
     margin-bottom: 15px;
   }
   &__menu {
+    display: flex;
     &-item {
-      font-size: 18px;
+      color: $main-color;
+      font-weight: 600;
+      font-size: 20px;
       margin-right: 10px;
       cursor: pointer;
+      opacity: 0.7;
       &.active {
-        color: red;
+        opacity: 1;
       }
+    }
+    button {
+      background: transparent;
+      border: 2px solid $main-color;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
     }
   }
   &-item {
+    margin-top: 50px;
     width: 600px;
     display: flex;
     justify-content: space-between;
@@ -42,12 +56,6 @@
     &__main {
       display: flex;
       flex-direction: column;
-      button {
-        display: block;
-        width: 100px;
-        height: 30px;
-        margin: 0 auto;
-      }
     }
     &__info {
       display: flex;

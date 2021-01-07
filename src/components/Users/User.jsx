@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import userPhoto from '../../images/user.png';
+import userPhoto from '../../images/default_profile_bigger.png';
+import Button from '../Button';
 
 const User = ({ user, userId, followingInProggress, unfollow, follow }) => {
+  console.log(user);
   return (
     <div key={userId} className="users-item">
       <div className="users-item__main">
@@ -11,21 +13,23 @@ const User = ({ user, userId, followingInProggress, unfollow, follow }) => {
           <img src={user.photos.small != null ? user.photos.large : userPhoto} alt="avatar" />
         </Link>
         {user.followed ? (
-          <button
+          <Button
+            className="button--follow"
             disabled={followingInProggress.some((id) => id === userId)}
             onClick={() => {
               unfollow(userId);
             }}>
             Unfollow
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
+            className="button--follow"
             disabled={followingInProggress.some((id) => id === userId)}
             onClick={() => {
               follow(userId);
             }}>
             Follow
-          </button>
+          </Button>
         )}
       </div>
       <div className="users-item__info">

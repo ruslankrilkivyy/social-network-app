@@ -7,24 +7,25 @@ import { Redirect } from 'react-router-dom';
 
 const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm);
 
-const Login = ({ login, isAuth }) => {
+const Login = ({ login, isAuth, captcha }) => {
   const onSubmit = (formData) => {
-    login(formData.email, formData.password, formData.rememberMe);
+    login(formData.email, formData.password, formData.rememberMe, formData.captcha);
   };
 
   if (isAuth) {
-    <Redirect to="/profile" />;
+    return <Redirect to="/profile" />;
   }
 
   return (
     <div>
       <div>LOGIN</div>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit} captchaUrl={captcha} />
     </div>
   );
 };
 
 let mapStateToProps = (state) => ({
+  captcha: state.authReducer.captcha,
   isAuth: state.authReducer.isAuth,
 });
 

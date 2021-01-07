@@ -1,7 +1,9 @@
+@import '../vars';
+
 .header {
   width: 100%;
   background-color: #fff;
-  height: 70px;
+  height: 50px;
   margin-bottom: 15px;
   &__content {
     display: flex;
@@ -13,8 +15,30 @@
     text-decoration: none;
     img {
       display: block;
-      width: 70px;
-      height: 70px;
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .login {
+    span {
+      font-weight: 500;
+      font-size: 18px;
+    }
+    button {
+      border: 1px solid $main-color;
+      background-color: transparent;
+      padding: 5px 10px;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 15px;
+      color: $main-color;
+      cursor: pointer;
+      transition: all 0.1s ease-in;
+
+      &:hover {
+        background-color: $main-color;
+        color: #fff;
+      }
     }
   }
 }

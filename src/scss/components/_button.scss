@@ -1,0 +1,29 @@
+@import '../vars';
+
+.button {
+  padding: 5px 30px;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 15px;
+  background: transparent;
+  color: $main-color;
+  border: 1px solid $main-color;
+  cursor: pointer;
+  outline: none;
+  &--follow {
+    display: block;
+    margin: 0 auto;
+    &:hover {
+      background-color: $background-color;
+    }
+    &:active {
+      background-color: rgba(83, 171, 238, 0.3);
+    }
+  }
+  &.disabled {
+    border-color: rgba(83, 171, 238, 0.8);
+    background-color: rgba(83, 171, 238, 0.8);
+    color: #fff;
+    pointer-events: none;
+  }
+}

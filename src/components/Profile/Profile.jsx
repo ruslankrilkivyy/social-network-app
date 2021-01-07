@@ -2,9 +2,19 @@ import React from 'react';
 import PostsContainer from './PostsContainer';
 import Preloader from '../Preloader/Preloader';
 import { Redirect } from 'react-router-dom';
-import ProfileStatus from './ProfileStatus';
+import userPng from '../../images/default_profile_bigger.png';
+import ProfileInfo from './ProfileInfo';
 
-function Profile({ profile, isAuth, status, updateStatus, isLoading }) {
+function Profile({
+  profile,
+  isAuth,
+  status,
+  updateStatus,
+  isLoading,
+  isOwner,
+  onSavePhoto,
+  updateProfileInfo,
+}) {
   if (!profile) {
     return <Preloader />;
   }
@@ -16,17 +26,18 @@ function Profile({ profile, isAuth, status, updateStatus, isLoading }) {
       <div className="profile__box">
         <img
           className="profile-avatar"
-          src={profile.photos.large || profile.photos.small}
+          src={profile.photos.large || profile.photos.small || userPng}
           alt="avatar"
         />
-        <div className="profile__info">
-          <h4 className="profile-name">{profile.fullName}</h4>
-          {isLoading ? (
-            <Preloader />
-          ) : (
-            <ProfileStatus status={status} updateStatus={updateStatus} />
-          )}
-        </div>
+        <ProfileInfo
+          profile={profile}
+          status={status}
+          updateStatus={updateStatus}
+          isLoading={isLoading}
+          isOwner={isOwner}
+          onSavePhoto={onSavePhoto}
+          updateProfileInfo={updateProfileInfo}
+        />
       </div>
       <PostsContainer />
     </div>

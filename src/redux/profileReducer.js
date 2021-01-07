@@ -1,4 +1,5 @@
 import { profileAPI } from '../api/api';
+import { stopSubmit } from 'redux-form';
 
 const ADD_POST = 'ADD_POST';
 const UPDATE_POST = 'UPDATE_POST';
@@ -6,6 +7,8 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
 const IS_LOADING = 'IS_LOADING';
+const SET_PROFILE_PHOTO = 'SET_PROFILE_PHOTO';
+const SEY_PROFILE_INFO = 'SEY_PROFILE_INFO';
 
 const initialState = {
   posts: [
@@ -55,12 +58,23 @@ const profileReducer = (state = initialState, action) => {
     case IS_LOADING: {
       return { ...state, isLoading: action.isLoading };
     }
+    case SET_PROFILE_PHOTO: {
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photos },
+      };
+    }
     case DELETE_POST: {
       return {
         ...state,
         posts: state.posts.filter((p) => p.id !== action.postId),
       };
     }
+    case SEY_PROFILE_INFO:
+      return {
+        ...state,
+        profile: action.profile,
+      };
     default:
       return state;
   }
@@ -71,6 +85,8 @@ export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 export const deletePost = (postId) => ({ type: DELETE_POST, postId });
 export const isLoading = (isLoading) => ({ type: IS_LOADING, isLoading });
+export const setProfilePhoto = (photos) => ({ type: SET_PROFILE_PHOTO, photos });
+export const setProfileInfo = (profile) => ({ type: SEY_PROFILE_INFO, profile });
 
 export const getProfileUser = (userId) => {
   return async (dispatch) => {
@@ -93,6 +109,29 @@ export const updateStatus = (status) => {
     const response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === 0) {
       dispatch(setStatus(status));
+    }
+  };
+};
+
+export const savePhoto = (photo) => {
+  return async (dispatch) => {
+    const response = await profileAPI.savePhoto(photo);
+    if (response.data.resultCode === 0) {
+      dispatch(setProfilePhoto(response.data.data.photos));
+    }
+  };
+};
+
+export const updateProfileInfo = (profile) => {
+  return async (dispatch, getState) => {
+    const userId = getState().authReducer.userId;
+    const response = await profileAPI.updateProfileInfo(profile);
+    if (response.data.resultCode === 0) {
+      dispatch(getProfileUser(userId));
+    } else {
+      let key = response.data.messages[0].match(/Contacts->(\w+)/)[1].toLowerCase();
+      dispatch(stopSubmit('edit-profile', { contacts: { [key]: response.data.messages[0] } }));
+      return Promise.reject(response.data.messages[0]);
     }
   };
 };

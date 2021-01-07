@@ -14,7 +14,7 @@ function Header({ isAuth, login, logout }) {
           <div className="login">
             {isAuth ? (
               <div>
-                {login} - <button onClick={logout}>Log out</button>
+                <span>{login}</span> - <button onClick={logout}>Log out</button>
               </div>
             ) : (
               <Link to="/login">Login</Link>
