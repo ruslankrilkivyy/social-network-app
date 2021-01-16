@@ -10,6 +10,37 @@ const IS_LOADING = 'IS_LOADING';
 const SET_PROFILE_PHOTO = 'SET_PROFILE_PHOTO';
 const SEY_PROFILE_INFO = 'SEY_PROFILE_INFO';
 
+type PostsType = {
+  id: number;
+  avatar: string;
+  post: string;
+};
+
+type ContactsType = {
+  github: string | null;
+  vk: string | null;
+  facebook: string | null;
+  instagram: string | null;
+  twitter: string | null;
+  website: string | null;
+  youtube: string | null;
+  mainLink: string | null;
+};
+
+type PhotosType = {
+  small: string | null;
+  large: string | null;
+};
+
+type ProfileType = {
+  userId: number;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+  fullName: string;
+  contacts: ContactsType;
+  photos: PhotosType;
+};
+
 const initialState = {
   posts: [
     {
@@ -29,13 +60,15 @@ const initialState = {
         'https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
       post: 'I know React Js',
     },
-  ],
-  profile: null,
+  ] as Array<PostsType> | null,
+  profile: null as ProfileType | null,
   status: null,
   isLoading: false,
 };
 
-const profileReducer = (state = initialState, action) => {
+export type initialStateType = typeof initialState;
+
+const profileReducer = (state = initialState, action: any): initialStateType => {
   switch (action.type) {
     case ADD_POST: {
       let newPost = {
@@ -80,23 +113,23 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPostAction = (text) => ({ type: ADD_POST, text });
-export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
-export const setStatus = (status) => ({ type: SET_STATUS, status });
-export const deletePost = (postId) => ({ type: DELETE_POST, postId });
-export const isLoading = (isLoading) => ({ type: IS_LOADING, isLoading });
-export const setProfilePhoto = (photos) => ({ type: SET_PROFILE_PHOTO, photos });
-export const setProfileInfo = (profile) => ({ type: SEY_PROFILE_INFO, profile });
+export const addPostAction = (text: string) => ({ type: ADD_POST, text });
+export const setUserProfile = (profile: any) => ({ type: SET_USER_PROFILE, profile });
+export const setStatus = (status: string) => ({ type: SET_STATUS, status });
+export const deletePost = (postId: number) => ({ type: DELETE_POST, postId });
+export const isLoading = (isLoading: boolean) => ({ type: IS_LOADING, isLoading });
+export const setProfilePhoto = (photos: string) => ({ type: SET_PROFILE_PHOTO, photos });
+export const setProfileInfo = (profile: any) => ({ type: SEY_PROFILE_INFO, profile });
 
-export const getProfileUser = (userId) => {
-  return async (dispatch) => {
+export const getProfileUser = (userId: number) => {
+  return async (dispatch: any) => {
     const data = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(data));
   };
 };
 
-export const getStatus = (userId) => {
-  return async (dispatch) => {
+export const getStatus = (userId: number) => {
+  return async (dispatch: any) => {
     dispatch(isLoading(true));
     const response = await profileAPI.getStatus(userId);
     dispatch(setStatus(response.data));
@@ -104,8 +137,8 @@ export const getStatus = (userId) => {
   };
 };
 
-export const updateStatus = (status) => {
-  return async (dispatch) => {
+export const updateStatus = (status: string) => {
+  return async (dispatch: any) => {
     const response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === 0) {
       dispatch(setStatus(status));
@@ -113,8 +146,8 @@ export const updateStatus = (status) => {
   };
 };
 
-export const savePhoto = (photo) => {
-  return async (dispatch) => {
+export const savePhoto = (photo: string) => {
+  return async (dispatch: any) => {
     const response = await profileAPI.savePhoto(photo);
     if (response.data.resultCode === 0) {
       dispatch(setProfilePhoto(response.data.data.photos));
@@ -122,8 +155,8 @@ export const savePhoto = (photo) => {
   };
 };
 
-export const updateProfileInfo = (profile) => {
-  return async (dispatch, getState) => {
+export const updateProfileInfo = (profile: any) => {
+  return async (dispatch: any, getState: any) => {
     const userId = getState().authReducer.userId;
     const response = await profileAPI.updateProfileInfo(profile);
     if (response.data.resultCode === 0) {
